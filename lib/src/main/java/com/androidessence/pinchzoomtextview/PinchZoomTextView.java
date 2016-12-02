@@ -1,6 +1,7 @@
 package com.androidessence.pinchzoomtextview;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
@@ -66,6 +67,16 @@ public class PinchZoomTextView extends TextView {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                setPaintFlags(getPaintFlags() | (Paint.LINEAR_TEXT_FLAG | Paint.SUBPIXEL_TEXT_FLAG));
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                setPaintFlags(getPaintFlags() & ~(Paint.LINEAR_TEXT_FLAG | Paint.SUBPIXEL_TEXT_FLAG));
+                break;
+        }
+
         // Must have two gestures.
         if(zoomEnabled && event.getPointerCount() == 2) {
             int action = event.getAction();
