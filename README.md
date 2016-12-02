@@ -9,7 +9,7 @@ Usage
 To have access to the library, add the dependency to your build.gradle:
 
 ```java
-	compile 'com.androidessence:pinchzoomtextview:1.0.0'
+	compile 'com.androidessence:pinchzoomtextview:1.0.1'
 ```
 
 Developer Notes
