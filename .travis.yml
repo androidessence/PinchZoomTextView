@@ -16,7 +16,6 @@ script:
   - chmod +x gradlew
   - ./gradlew clean build --stacktrace --info
 
-
 notifications:
   email: false
 
