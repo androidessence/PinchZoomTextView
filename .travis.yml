@@ -23,7 +23,7 @@ before_script:
 
 script:
   - chmod +x gradlew
-  - ./gradlew clean build --stacktrace --info
+  - ./gradlew clean build connectedCheck --stacktrace --info
 
 notifications:
   email: false
