@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "$build_tools_version"
     defaultConfig {
         applicationId "com.androidessence.pinchzoomtextview.sample"
         minSdkVersion 16
