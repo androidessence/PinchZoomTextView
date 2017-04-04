@@ -1,21 +1,29 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "$build_tools_version"
+
     defaultConfig {
-        applicationId "com.androidessence.pinchzoomtextview.sample"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+
+        def globalConfiguration = rootProject.extensions.getByName("ext")
+        versionCode globalConfiguration["library_version_code"]
+        versionName "$library_version_number"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 }
 
@@ -24,7 +32,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:appcompat-v7:$support_lib_version"
     testCompile 'junit:junit:4.12'
-    compile project(':lib')
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
+
+ext {
+    PUBLISH_GROUP_ID = 'com.androidessence'
+    PUBLISH_ARTIFACT_ID = 'pinchzoomtextview-kotlin'
+    PUBLISH_VERSION = "$library_version_number"
+}
+
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
