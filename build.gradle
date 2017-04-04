@@ -23,6 +23,7 @@ allprojects {
 
     ext {
         build_tools_version = '25.0.2'
+        support_lib_version = '25.3.0'
     }
 }
 
