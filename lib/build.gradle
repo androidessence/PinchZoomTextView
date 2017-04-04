@@ -7,8 +7,10 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
-        versionName "1.0.1"
+
+        def globalConfiguration = rootProject.extensions.getByName("ext")
+        versionCode globalConfiguration["library_version_code"]
+        versionName "$library_version_number"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -32,7 +34,7 @@ dependencies {
 ext {
     PUBLISH_GROUP_ID = 'com.androidessence'
     PUBLISH_ARTIFACT_ID = 'pinchzoomtextview'
-    PUBLISH_VERSION = '1.0.1'
+    PUBLISH_VERSION = "$library_version_number"
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
