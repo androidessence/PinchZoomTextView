@@ -35,9 +35,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
-repositories {
-    mavenCentral()
-}
 
 ext {
     PUBLISH_GROUP_ID = 'com.androidessence'
