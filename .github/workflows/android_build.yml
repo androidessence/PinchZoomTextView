@@ -20,4 +20,4 @@ jobs:
         run: ./gradlew test
 
       - name: Lint Checks
-        run: ./gradlew ktlint detekt
+        run: ./gradlew ktlintCheck detekt
