@@ -1,4 +1,4 @@
-package com.adammcneilly.pinchzoomtextview
+package com.androidessence.pinchzoomtextview
 
 import android.annotation.SuppressLint
 import android.content.Context
