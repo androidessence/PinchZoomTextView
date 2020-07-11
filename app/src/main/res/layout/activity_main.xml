@@ -8,9 +8,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.adammcneilly.pinchzoomtextview.kotlin.sample.MainActivity">
+    tools:context="com.adammcneilly.pinchzoomtextview.sample.MainActivity">
 
-    <com.adammcneilly.pinchzoomtextview.kotlin.PinchZoomTextView
+    <com.adammcneilly.pinchzoomtextview.PinchZoomTextView
         android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
