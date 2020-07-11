@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.widget.TextView
 import kotlin.math.max
@@ -13,8 +14,6 @@ import kotlin.math.sqrt
 
 /**
  * TextView that increases/decreases font size as it is pinched.
- *
- * Created by adam.mcneilly on 12/27/16.
  */
 open class PinchZoomTextView @JvmOverloads constructor(
     context: Context,
@@ -37,9 +36,42 @@ open class PinchZoomTextView @JvmOverloads constructor(
     private var baseRatio: Float = 0f
 
     /**
+     * The initial text size of this view when it's inflated, so we can use
+     * this to make sure we scale accordingly.
+     */
+    private var initialTextSizePx: Int = spToPx(DEFAULT_FONT_SIZE_SP)
+
+    /**
+     * Helper variable to convert the [initialTextSizePx] to the text size in SP so that it can be
+     * set on this view accordingly.
+     */
+    private val initialTextSizeSp: Float
+        get() = pxToSp(initialTextSizePx.toFloat())
+
+    /**
      * Boolean flag for whether or not zoom feature is enabled. Defaults to true.
      */
     var zoomEnabled: Boolean = true
+
+    init {
+        val typedArray = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.PinchZoomTextView,
+            0,
+            0
+        )
+
+        try {
+            initialTextSizePx = typedArray.getDimensionPixelSize(
+                R.styleable.PinchZoomTextView_android_textSize,
+                this.initialTextSizePx
+            )
+        } finally {
+            typedArray.recycle()
+        }
+
+        this.textSize = initialTextSizeSp
+    }
 
     /**
      * Handles the touch event by the user and determines whether font size should grow,
@@ -82,7 +114,7 @@ open class PinchZoomTextView @JvmOverloads constructor(
                     val delta = (distance - baseDistance) / STEP
                     val multi = 2.0.pow(delta.toDouble()).toFloat()
                     ratio = min(MAX_RATIO, max(MIN_RATIO, baseRatio * multi))
-                    textSize = ratio + INITIAL_FONT_SIZE
+                    textSize = ratio + initialTextSizeSp
                 }
             }
         }
@@ -97,6 +129,19 @@ open class PinchZoomTextView @JvmOverloads constructor(
         val dx = (event.getX(0) - event.getX(1))
         val dy = (event.getY(0) - event.getY(1))
         return sqrt((dx * dx).toDouble() + (dy * dy)).toInt()
+    }
+
+    private fun spToPx(sp: Float): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sp,
+            context.resources.displayMetrics
+        )
+            .toInt()
+    }
+
+    private fun pxToSp(px: Float): Float {
+        return px / resources.displayMetrics.scaledDensity
     }
 
     companion object {
@@ -121,11 +166,8 @@ open class PinchZoomTextView @JvmOverloads constructor(
         private const val MIN_RATIO = 0.1f
 
         /**
-         * We need to keep track of the initial font size, so that as the user
-         * scales we can add this to the new ratio.
-         *
-         * TODO: This feels like a bug in the previous lib version, need to investigate.
+         * The default font size if one is not supplied via XML.
          */
-        private const val INITIAL_FONT_SIZE = 13
+        private const val DEFAULT_FONT_SIZE_SP = 14F
     }
 }
