@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PinchZoomTextView-Kotlin</string>
+    <string name="app_name">PinchZoomTextView</string>
     <string name="zoom_enabled">Zoom Enabled</string>
     <string name="zoom_disabled">Zoom Disabled</string>
 </resources>
