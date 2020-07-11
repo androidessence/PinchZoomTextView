@@ -24,7 +24,6 @@ allprojects {
     }
 
     ext {
-        support_lib_version = '25.3.0'
         library_version_code = 2
         library_version_number = '1.0.1'
     }
