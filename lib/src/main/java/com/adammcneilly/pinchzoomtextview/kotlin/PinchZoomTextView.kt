@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.widget.TextView
@@ -15,8 +14,6 @@ import kotlin.math.sqrt
 
 /**
  * TextView that increases/decreases font size as it is pinched.
- *
- * Created by adam.mcneilly on 12/27/16.
  */
 open class PinchZoomTextView @JvmOverloads constructor(
     context: Context,
