@@ -1,4 +1,4 @@
-package com.adammcneilly.pinchzoomtextview.kotlin.sample;
+package com.adammcneilly.pinchzoomtextview.sample;
 
 import org.junit.Test;
 

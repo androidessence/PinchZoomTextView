@@ -1,4 +1,4 @@
-package com.adammcneilly.pinchzoomtextview.kotlin;
+package com.adammcneilly.pinchzoomtextview;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.adammcneilly.pinchzoomtextview.kotlin.test", appContext.getPackageName());
+        assertEquals("com.adammcneilly.pinchzoomtextview.test", appContext.getPackageName());
     }
 }
