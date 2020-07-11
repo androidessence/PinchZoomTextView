@@ -1,10 +1,15 @@
 package com.adammcneilly.pinchzoomtextview.kotlin
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.TextView
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * TextView that increases/decreases font size as it is pinched.
@@ -44,11 +49,12 @@ open class PinchZoomTextView @JvmOverloads constructor(
      * so collect base values.
      *
      * Otherwise, the user is pinching, so get the distance between the pointers, find the ratio
-     * we need, and set the text size. Note: based on an initial size of 13, and can't exceed a ratio
-     * of 1024.
+     * we need, and set the text size.
      *
      * Inspiration taken from: http://stackoverflow.com/a/20303367/3131147
      */
+    @Suppress("MoveVariableDeclarationIntoWhen")
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         // If null for some reason, return
         if (event == null) return false
@@ -74,8 +80,8 @@ open class PinchZoomTextView @JvmOverloads constructor(
                 }
                 else -> {
                     val delta = (distance - baseDistance) / STEP
-                    val multi = Math.pow(2.0, delta.toDouble()).toFloat()
-                    ratio = Math.min(MAX_RATIO, Math.max(MIN_RATIO, baseRatio * multi))
+                    val multi = 2.0.pow(delta.toDouble()).toFloat()
+                    ratio = min(MAX_RATIO, max(MIN_RATIO, baseRatio * multi))
                     textSize = ratio + INITIAL_FONT_SIZE
                 }
             }
@@ -90,7 +96,7 @@ open class PinchZoomTextView @JvmOverloads constructor(
     private fun getDistance(event: MotionEvent): Int {
         val dx = (event.getX(0) - event.getX(1))
         val dy = (event.getY(0) - event.getY(1))
-        return Math.sqrt((dx * dx).toDouble() + (dy * dy)).toInt()
+        return sqrt((dx * dx).toDouble() + (dy * dy)).toInt()
     }
 
     companion object {
