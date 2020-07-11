@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.androidessence.pinchzoomtextview.PinchZoomTextView
-import com.adammcneilly.pinchzoomtextview.kotlin.sample.R
 
 class MainActivity : AppCompatActivity() {
 
