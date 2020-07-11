@@ -1,4 +1,4 @@
-package com.adammcneilly.pinchzoomtextview
+package com.androidessence.pinchzoomtextview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.widget.TextView
-import com.adammcneilly.pinchzoomtextview.kotlin.R
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow

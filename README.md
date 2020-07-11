@@ -9,7 +9,7 @@ Usage
 To have access to the library, add the dependency to your build.gradle:
 
 ```java
-	compile 'com.androidessence:pinchzoomtextview:1.0.1'
+	compile 'com.androidessence:pinchzoomtextview:2.0.0'
 ```
 
 Developer Notes
@@ -23,6 +23,16 @@ Sample
 To see the library in action, here is a sample of the text size changing:
 
 <img src='sample.gif' width='400' height='640' />
+
+Changelog
+---------
+
+Version 2.0.0:
+
+* Converted library to Kotlin.
+* Fixed a [bug](https://github.com/androidessence/PinchZoomTextView/issues/15) if the initial text size wasn't the default.
+* Updated compile SDK to 29 and switched to AndroidX dependencies.
+
 
 Credits & Contact
 -----------------

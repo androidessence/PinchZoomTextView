@@ -55,7 +55,7 @@ detekt {
 
 ext {
     PUBLISH_GROUP_ID = "com.androidessence"
-    PUBLISH_ARTIFACT_ID = "pinchzoomtextview-kotlin"
+    PUBLISH_ARTIFACT_ID = "pinchzoomtextview"
     PUBLISH_VERSION = "$library_version_number"
 }
 

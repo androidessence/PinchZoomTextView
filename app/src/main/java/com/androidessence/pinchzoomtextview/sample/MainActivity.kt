@@ -1,10 +1,9 @@
-package com.adammcneilly.pinchzoomtextview.sample
+package com.androidessence.pinchzoomtextview.sample
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.adammcneilly.pinchzoomtextview.PinchZoomTextView
-import com.adammcneilly.pinchzoomtextview.kotlin.sample.R
+import com.androidessence.pinchzoomtextview.PinchZoomTextView
 
 class MainActivity : AppCompatActivity() {
 
