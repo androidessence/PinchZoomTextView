@@ -1,5 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+apply plugin: "io.gitlab.arturbosch.detekt"
 
 android {
     compileSdkVersion 29
@@ -18,25 +20,43 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += "src/main/kotlin"
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.13'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    testImplementation "junit:junit:4.13"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+}
+
+ktlint {
+    reporters {
+        reporter "plain"
+        reporter "checkstyle"
+    }
+    outputColorName = "RED"
+}
+
+detekt {
+    config = files("${rootProject.projectDir}/config/detekt/detekt.yml")
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        txt.enabled = true
+    }
 }
 
 ext {
-    PUBLISH_GROUP_ID = 'com.androidessence'
-    PUBLISH_ARTIFACT_ID = 'pinchzoomtextview-kotlin'
+    PUBLISH_GROUP_ID = "com.androidessence"
+    PUBLISH_ARTIFACT_ID = "pinchzoomtextview-kotlin"
     PUBLISH_VERSION = "$library_version_number"
 }
 
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+apply from: "https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle"

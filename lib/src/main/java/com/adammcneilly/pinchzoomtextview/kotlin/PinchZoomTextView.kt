@@ -11,7 +11,10 @@ import android.widget.TextView
  *
  * Created by adam.mcneilly on 12/27/16.
  */
-open class PinchZoomTextView : TextView {
+open class PinchZoomTextView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null
+) : TextView(context, attrs) {
 
     /**
      * The ratio of the text size compared to its original.
@@ -32,16 +35,6 @@ open class PinchZoomTextView : TextView {
      * Boolean flag for whether or not zoom feature is enabled. Defaults to true.
      */
     var zoomEnabled: Boolean = true
-
-    /**
-     * Default constructor.
-     */
-    constructor(context: Context): this(context, null) { }
-
-    /**
-     * Default constructor.
-     */
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs) { }
 
     /**
      * Handles the touch event by the user and determines whether font size should grow,
@@ -82,8 +75,8 @@ open class PinchZoomTextView : TextView {
                 else -> {
                     val delta = (distance - baseDistance) / STEP
                     val multi = Math.pow(2.0, delta.toDouble()).toFloat()
-                    ratio = Math.min(1024.0f, Math.max(0.1f, baseRatio * multi))
-                    textSize = ratio + 13
+                    ratio = Math.min(MAX_RATIO, Math.max(MIN_RATIO, baseRatio * multi))
+                    textSize = ratio + INITIAL_FONT_SIZE
                 }
             }
         }
@@ -105,6 +98,28 @@ open class PinchZoomTextView : TextView {
          * Consider each "step" between the two pointers as 200px. In other words, the TV size
          * will grow every 200 px the user's finger moves.
          */
-        private val STEP: Float = 200f
+        private const val STEP: Float = 200f
+
+        /**
+         * The largest ratio supported of a text size growth compared to the original text size.
+         *
+         * @see [ratio]
+         */
+        private const val MAX_RATIO = 1024.0f
+
+        /**
+         * The minimum ratio supported of a text size scale compared to the original text size.
+         *
+         * @see [ratio]
+         */
+        private const val MIN_RATIO = 0.1f
+
+        /**
+         * We need to keep track of the initial font size, so that as the user
+         * scales we can add this to the new ratio.
+         *
+         * TODO: This feels like a bug in the previous lib version, need to investigate.
+         */
+        private const val INITIAL_FONT_SIZE = 13
     }
 }
