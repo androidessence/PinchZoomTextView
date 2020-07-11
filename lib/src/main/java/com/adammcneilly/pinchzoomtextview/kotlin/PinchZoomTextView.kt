@@ -12,8 +12,8 @@ import android.widget.TextView
  * Created by adam.mcneilly on 12/27/16.
  */
 open class PinchZoomTextView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null
+    context: Context,
+    attrs: AttributeSet? = null
 ) : TextView(context, attrs) {
 
     /**
