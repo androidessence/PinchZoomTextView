@@ -1,8 +1,9 @@
 package com.adammcneilly.pinchzoomtextview.kotlin.sample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.adammcneilly.pinchzoomtextview.kotlin.PinchZoomTextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,10 +11,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        zoom_toggle.setOnClickListener {
-            val newEnabledState = !text_view.zoomEnabled
-            text_view.zoomEnabled = newEnabledState
-            zoom_toggle.text = if (newEnabledState) getString(R.string.zoom_enabled) else getString(R.string.zoom_disabled)
+        val textView = findViewById<PinchZoomTextView>(R.id.text_view)
+        val zoomToggle = findViewById<TextView>(R.id.zoom_toggle)
+
+        zoomToggle.setOnClickListener {
+            val newEnabledState = !textView.zoomEnabled
+            textView.zoomEnabled = newEnabledState
+            zoomToggle.text = if (newEnabledState) getString(R.string.zoom_enabled) else getString(R.string.zoom_disabled)
         }
     }
 }
